@@ -1,7 +1,9 @@
+// Controller zur Handhabung der Benutzerregistrierung und Anmeldung
 import { Request, Response } from 'express';
 import User from '../models/user.model';
 import { generateToken } from '../utils/jwt';
 
+// Registriert einen neuen Benutzer
 export const registerUser = async (req: Request, res: Response) => {
   try {
     const { email, password, role } = req.body;
@@ -14,6 +16,7 @@ export const registerUser = async (req: Request, res: Response) => {
   }
 };
 
+// Führt die Benutzeranmeldung durch
 export const loginUser = async (req: Request, res: Response) => {
   try {
     const { email, password } = req.body;

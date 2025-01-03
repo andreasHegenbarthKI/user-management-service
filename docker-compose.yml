@@ -1,0 +1,21 @@
+version: '3.8'
+
+services:
+  app:
+    build: .  // Baut das Docker-Image aus dem aktuellen Verzeichnis (Dockerfile)
+    ports:
+      - "5000:5000"  // Leitet Port 5000 vom Container zum Host weiter
+    environment:
+      - MONGO_URI=mongodb://mongo:27017/user-service  // Verbindungs-URI für MongoDB
+    depends_on:
+      - mongo  // Stellt sicher, dass MongoDB vor der Anwendung gestartet wird
+
+  mongo:
+    image: mongo  // Verwendet das offizielle MongoDB-Image
+    ports:
+      - "27017:27017"  // Leitet den MongoDB-Port weiter
+    volumes:
+      - mongo-data:/data/db  // Speichert die MongoDB-Daten persistent in einem Volume
+
+volumes: 
+  mongo-data:
